@@ -3,7 +3,7 @@ Sends an SOS CW (morse code) message on 434.0MHz. Works against flipperzero api 
 
 By default, the message transmitted is SMS (••• •–• •••) which you might know as the nokia SMS tune. 
 
-The message can be toggled between "SMS" and "SOS" by pressing: left, right, left, right, left, right, down. 
+The message can be toggled between "SMS" and "SOS" by pressing: left, right, left, right, left, right, enter. 
 
 # technical details
 
