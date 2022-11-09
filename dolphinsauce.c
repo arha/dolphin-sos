@@ -227,6 +227,8 @@ int32_t sos_app(void* p)
                 case InputKeyBack:
                     processing = false;
                     break;
+                default:
+                    break;
                 }
             } else if (event.type == InputTypeRelease)
             {
