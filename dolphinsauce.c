@@ -1,4 +1,5 @@
 #include "dolphinsauce.h"
+#include <cc1101.h>
 
 void draw_callback(Canvas* canvas, void* ctx)
 {
@@ -61,8 +62,23 @@ AppFSM* app_init()
 void rf_dumb()
 {
     uint32_t frequency = 438000000;
+    frequency = 432100000;
     furi_hal_subghz_load_preset(FuriHalSubGhzPresetOok650Async);
     frequency = furi_hal_subghz_set_frequency_and_path(frequency);
+
+
+    /*
+    furi_hal_subghz_set_path(FuriHalSubGhzPath433);
+    furi_hal_spi_acquire(&furi_hal_spi_bus_handle_subghz);
+    uint32_t real_frequency = cc1101_set_frequency(&furi_hal_spi_bus_handle_subghz, frequency);
+    UNUSED(real_frequency);
+    cc1101_calibrate(&furi_hal_spi_bus_handle_subghz);
+    while(true) {
+        CC1101Status status = cc1101_get_status(&furi_hal_spi_bus_handle_subghz);
+        if(status.STATE == CC1101StateIDLE) break;
+    }
+    furi_hal_spi_release(&furi_hal_spi_bus_handle_subghz);
+    */
 
     furi_hal_gpio_init(&gpio_cc1101_g0, GpioModeOutputPushPull, GpioPullNo, GpioSpeedLow);
     furi_hal_gpio_write(&gpio_cc1101_g0, true);
@@ -84,10 +100,10 @@ void rf_start_cw()
     /*if (app_global->active_msg == &sos_msg)
     {*/
         furi_hal_light_set(LightBacklight, 0xFF);
-        furi_hal_speaker_start(MARKER_HZ, 1);
+        // furi_hal_speaker_start(MARKER_HZ, 1);
     //}
     furi_hal_light_set(LightRed | LightGreen | LightBlue, 0xFF);
-    uint32_t frequency = 434000000;
+    uint32_t frequency = 432100000;
     furi_hal_subghz_load_preset(FuriHalSubGhzPresetOok650Async);
     frequency = furi_hal_subghz_set_frequency_and_path(frequency);
 
@@ -108,7 +124,7 @@ void rf_stop_cw()
     if (app_global->active_msg == &sos_msg)
     {*/
         furi_hal_light_set(LightBacklight, 0);
-        furi_hal_speaker_stop();
+        // furi_hal_speaker_stop();
     //}
     furi_hal_light_set(LightRed | LightGreen | LightBlue, 0);
 }
