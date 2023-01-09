@@ -62,7 +62,7 @@ AppFSM* app_init()
 void rf_dumb()
 {
     uint32_t frequency = 438000000;
-    frequency = 432100000;
+    frequency = 434000000;
     furi_hal_subghz_load_preset(FuriHalSubGhzPresetOok650Async);
     frequency = furi_hal_subghz_set_frequency_and_path(frequency);
 
@@ -104,6 +104,7 @@ void rf_start_cw()
     //}
     furi_hal_light_set(LightRed | LightGreen | LightBlue, 0xFF);
     uint32_t frequency = 432100000;
+    frequency = 434000000;
     furi_hal_subghz_load_preset(FuriHalSubGhzPresetOok650Async);
     frequency = furi_hal_subghz_set_frequency_and_path(frequency);
 
